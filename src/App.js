@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import Header from "./Header";
 import Help from "./Help"
-
+import Test from "./test"
 
 export default class App extends PureComponent {
 
@@ -10,6 +10,7 @@ export default class App extends PureComponent {
         <div>
             <Header />
             <Help />
+            <Test />
         </div>
     );
   }
