@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import "./Header.css";
 
-export default class Header extends PureComponent {
-  render() {
+export default function Header({
+
+}) {
     return (
       <header className="component-header">
         <img
@@ -21,4 +22,3 @@ export default class Header extends PureComponent {
       </header>
     );
   }
-}
