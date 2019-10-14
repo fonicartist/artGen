@@ -5,6 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring';
 import Button from '@material-ui/core/Button';
 
+// styling is specific to material-ui, so styles declared here
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',

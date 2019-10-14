@@ -1,17 +1,16 @@
 import React, { PureComponent } from "react";
 import Header from "./Header";
 import Help from "./Help"
-import Test from "./test"
+import Body from "./body"
 
-export default class App extends PureComponent {
+import "./styles.scss";
 
-  render() {
-    return (
-        <div>
-            <Header />
-            <Help />
-            <Test />
-        </div>
-    );
-  }
-}
+const App = () => {
+  return (
+  <div className={"root"}>
+      <Header />
+      <Body />
+  </div>
+)};
+
+export default App;

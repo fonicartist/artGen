@@ -1,3 +1,14 @@
+//import image from './images/free_image.jpeg';
+
+.root {
+  //background-image: url('./images/free_image.jpeg');
+  background-color: blue;
+  background: no-repeat center center cover;
+  background-size: cover;
+  background-repeat: repeat-x;
+
+}
+
 .button {
     padding: 15px;
     position: relative;

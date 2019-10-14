@@ -3,6 +3,7 @@ import Popup from "reactjs-popup";
 import "./Help.css"
 
 export default () => (
+  <div className="padding">
     <Popup trigger={<button className="button"> Help</button>} position="bottom">
         <div className="popup">Welcome!</div>
         <div className="popup">To get started:</div>
@@ -14,4 +15,5 @@ export default () => (
         </div>
         <div className="popup">Download:</div>
     </Popup>
+  </div>
 );
