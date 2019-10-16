@@ -1,10 +1,14 @@
 import React, { PureComponent } from "react";
-import "./Header.css";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
+//import "./Header.css";
 
 export default function Header({
-
-}) {
+}){
     return (
+      <div>
       <header className="component-header">
         <img
           src="//cdn.jsdelivr.net/emojione/assets/png/1f638.png"
@@ -20,5 +24,6 @@ export default function Header({
           alt=""
         />
       </header>
+    </div>
     );
   }
