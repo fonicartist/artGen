@@ -1,33 +1,39 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import { useSpring, animated } from 'react-spring';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import { useSpring, animated } from "react-spring";
+import Button from "@material-ui/core/Button";
 
 // styling is specific to material-ui, so styles declared here
 const useStyles = makeStyles(theme => ({
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '90%',
-    margin: 'auto'
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "80%",
+    margin: "auto"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[1],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 4, 3)
   },
   root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    // background: "linear-gradient(45deg, #84b4db 30%, #f06856 90%)",
+    background: "#84b4db",
     border: 0,
     borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: 'white',
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    color: "white",
     padding: theme.spacing(2, 4, 3),
+    opacity: 0.8
   },
+  button: {
+    fontSize: "20px",
+    color: "#f06856"
+  }
 }));
 
 // const Fade = React.forwardRef(function function Card() {
@@ -50,6 +56,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
   const style = useSpring({
     from: { opacity: 0 },
     to: { opacity: open ? 1 : 0 },
+    config: { duration: 500 },
     onStart: () => {
       if (open && onEnter) {
         onEnter();
@@ -59,7 +66,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
       if (!open && onExited) {
         onExited();
       }
-    },
+    }
   });
 
   return (
@@ -83,7 +90,7 @@ export default function SimpleModal() {
 
   return (
     <div>
-      <Button type="button" onClick={handleOpen}>
+      <Button type="button" onClick={handleOpen} className={classes.button}>
         Help
       </Button>
       <Modal
@@ -95,14 +102,20 @@ export default function SimpleModal() {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 500
         }}
       >
         <Fade in={open}>
           <div className={classes.root}>
             <h2 id="spring-modal-title">Help Modal</h2>
             <p id="spring-modal-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum
             </p>
           </div>
         </Fade>
