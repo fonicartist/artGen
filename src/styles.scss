@@ -74,18 +74,18 @@
   justify-content: center;
 }
 
-// .imageBackground {
-//   height: 100vh;
-//   width: 100%;
-//   top: 0;
-//   padding: none;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
+.image {
+  position: absolute;
+  top: 45vh;
+}
 
-.whiteBackground {
-  background: url(images/whiteBackground.jpg) no-repeat center center fixed;
+.button {
+  position: absolute;
+  top: 35vh;
+}
+
+.imageBackground {
+  background: url(images/colorBackground.svg);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -93,5 +93,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   position: relative;
 }
