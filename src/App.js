@@ -1,16 +1,9 @@
-import React, { PureComponent } from "react";
-import Header from "./Header";
-import Help from "./Help"
-import Body from "./body"
+import React from "react";
+import { useRoutes } from "hookrouter";
+import Routes from "./Routes";
 
-import "./styles.scss";
+export default function App() {
+  const routeResult = useRoutes(Routes);
 
-const App = () => {
-  return (
-  <div className={"root"}>
-      <Header />
-      <Body />
-  </div>
-)};
-
-export default App;
+  return <div>{routeResult}</div>;
+}

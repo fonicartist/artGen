@@ -1,0 +1,18 @@
+.card {
+  width: 20ch;
+  height: 20ch;
+  border-radius: 15px;
+  background-image: url(images/logo.jpg);
+  background-size: cover;
+  transition: box-shadow 0.5s;
+  will-change: transform;
+}
+
+.card:hover {
+  box-shadow: 0px 30px 100px -10px rgb(143, 39, 39);
+}
+
+.card:active {
+  transition: box-shadow 0.1s;
+  box-shadow: 0px 30px 100px -10px rgb(40, 50, 184);
+}
