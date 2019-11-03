@@ -76,12 +76,14 @@
 
 .image {
   position: absolute;
-  top: 45vh;
+  top: 60vh;
 }
 
 .button {
   position: absolute;
   top: 35vh;
+  //bottom: 35vh;
+  //padding: 20px;
 }
 
 .imageBackground {
@@ -95,4 +97,9 @@
   align-items: center;
   margin: auto;
   position: relative;
+}
+
+.toFront {
+  position: relative;
+  z-index: 1;
 }

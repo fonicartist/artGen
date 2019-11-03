@@ -56,7 +56,7 @@ export default function ElevateAppBar(props) {
         <AppBar className={classes.root}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              ART GENERATER
+              ART GENERATOR
             </Typography>
             <SimpleModal />
           </Toolbar>
