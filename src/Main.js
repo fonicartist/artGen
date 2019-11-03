@@ -51,7 +51,6 @@ export default function Main() {
             onMouseLeave={() => set({ xys: [0, 0, 1] })}
             onClick={() => {
               setTimeout(() => {
-                console.log(destination);
                 setDestination("/Home");
               }, 200);
             }}
