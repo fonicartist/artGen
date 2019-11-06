@@ -92,13 +92,6 @@ export default function Home() {
           </video>
         </animated.div>
         <div className="imageBackground">
-        <Grid
-          container spacing={24}
-          direction="column"
-          justify="flex-start"
-          alignItems="center"
-        >
-          <Grid item xs={12}>
             <ButtonGroup
             variant="contained"
             color="secondary"
@@ -143,11 +136,9 @@ export default function Home() {
                 </Grow>
               )}
             </Popper>
-          </Grid>
           <animated.div style={fade} className="image">
             {openImage ? <img src={getImage(selectedIndex)} alt="" /> : null}
           </animated.div>
-        </Grid>
         </div>
 
       </ReactPageScroller>
