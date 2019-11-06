@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import background from "./videos/background.mp4";
-import image from "./images/free_image.jpeg";
+import mtn from "./images/free_image.jpeg";
+import sea from "./images/sea.jpeg";
+import trees from "./images/trees.jpeg";
+import river from "./images/water.jpeg";
 import ElevateAppBar from "./Appbar";
 import "./styles.scss";
 
@@ -18,9 +21,10 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 
-import SplitButton from "./testcategories";
-const options = ['Spring', 'Summer', 'Autumn', 'Winter'];
+const options = ['Trees', 'Beach', 'River/Pond', 'Mountain'];
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -48,13 +52,14 @@ export default function Home() {
     setOpenImage(false);
   };
 
-  const handleClick = () => {
-    alert(`You clicked ${options[selectedIndex]}`);
-  };
+  // const handleClick = () => {
+  //   alert(`You clicked ${options[selectedIndex]}`);
+  // };
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
     setOpen(false);
+    reset();
   };
 
   const handleToggle = () => {
@@ -68,6 +73,15 @@ export default function Home() {
     setOpen(false);
   };
 
+  function getImage(i) {
+    switch (i) {
+      case 0: return trees;
+      case 1: return sea;
+      case 2: return river;
+      case 3: return mtn;
+      default: return null;
+    }
+  }
   return (
     <div>
       <ElevateAppBar />
@@ -78,13 +92,64 @@ export default function Home() {
           </video>
         </animated.div>
         <div className="imageBackground">
-          {/* <div className="padding-center">
-            <Button onClick={onClick}>Get image</Button>
-            <Button onClick={reset}>Reset</Button>
-          </div> */}
-          <SplitButton />
-          
+        <Grid
+          container spacing={24}
+          direction="column"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Grid item xs={12}>
+            <ButtonGroup
+            variant="contained"
+            color="secondary"
+            ref={anchorRef}
+            aria-label="split button large outlined secondary group"
+            className="button"
+            >
+              <Button onClick={onClick}>{options[selectedIndex]}</Button>
+              <Button
+                color="secondary"
+                size="small"
+                aria-owns={open ? 'menu-list-grow' : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+              >
+                <ArrowDropDownIcon />
+              </Button>
+            </ButtonGroup>
+            <Popper className="toFront" open={open} anchorEl={anchorRef.current} transition disablePortal>
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{
+                    transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                  }}
+                >
+                  <Paper id="menu-list-grow">
+                    <ClickAwayListener onClickAway={handleClose}>
+                      <MenuList>
+                        {options.map((option, index) => (
+                          <MenuItem
+                            key={option}
+                            selected={index === selectedIndex}
+                            onClick={event => handleMenuItemClick(event, index)}
+                          >
+                            {option}
+                          </MenuItem>
+                        ))}
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+          </Grid>
+          <animated.div style={fade} className="image">
+            {openImage ? <img src={getImage(selectedIndex)} alt="" /> : null}
+          </animated.div>
+        </Grid>
         </div>
+
       </ReactPageScroller>
     </div>
   );

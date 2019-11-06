@@ -80,14 +80,15 @@
 }
 
 .button {
-  position: absolute;
-  top: 35vh;
-  //bottom: 35vh;
-  //padding: 20px;
+  //position: absolute;
+  //top: 35vh;
+  //float: top;
+  //padding-left: 100px;
 }
 
 .imageBackground {
-  background: url(images/colorBackground.svg);
+  //background: url(images/colorBackground.svg);
+  background-color: pink;
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
