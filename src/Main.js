@@ -50,9 +50,7 @@ export default function Main() {
             }
             onMouseLeave={() => set({ xys: [0, 0, 1] })}
             onClick={() => {
-              setTimeout(() => {
-                setDestination("/Home");
-              }, 200);
+              setDestination("/Home");
             }}
             style={{ transform: props.xys.interpolate(trans) }}
           />

@@ -48,8 +48,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
   position: relative;
+}
+
+.toFront {
+  position: relative;
+  z-index: 1;
 }
 
 #navigation {
