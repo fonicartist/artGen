@@ -84,7 +84,7 @@
   top: 35vh;
 }
 
-.imageBackground {
+.firstBackground {
   background: url(images/colorBackground.svg);
   height: 100vh;
   background-position: center;
@@ -95,4 +95,26 @@
   align-items: center;
   margin: auto;
   position: relative;
+}
+
+.secondBackground {
+  background: url(images/floralBackground.jpg);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  position: relative;
+}
+
+#navigation {
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
 }

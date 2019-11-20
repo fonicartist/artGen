@@ -1,0 +1,66 @@
+.padding-center {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video {
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+  top: 0;
+  padding: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  position: absolute;
+  top: 45vh;
+}
+
+.button {
+  position: absolute;
+  top: 35vh;
+}
+
+.firstBackground {
+  background: url(images/colorBackground.svg);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  position: relative;
+}
+
+.secondBackground {
+  background: url(images/floralBackground.jpg);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.toFront {
+  position: relative;
+  z-index: 1;
+}
+
+#navigation {
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}

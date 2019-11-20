@@ -5,6 +5,11 @@ import Backdrop from "@material-ui/core/Backdrop";
 import { useSpring, animated } from "react-spring";
 import Button from "@material-ui/core/Button";
 
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Typography from "@material-ui/core/Typography";
+
 // styling is specific to material-ui, so styles declared here
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -21,35 +26,50 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3)
   },
   root: {
-    // background: "linear-gradient(45deg, #84b4db 30%, #f06856 90%)",
     background: "#84b4db",
     border: 0,
     borderRadius: 3,
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
     color: "white",
     padding: theme.spacing(2, 4, 3),
-    opacity: 0.8
+    opacity: 0.85
   },
   button: {
     fontSize: "20px",
     color: "#f06856"
+  },
+  backButton: {
+    marginRight: theme.spacing(1)
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    textAlign: "center"
+  },
+  stepper: {
+    borderRadius: 3,
+    padding: 15,
+    color: "#c92510",
+    textAlign: "right",
+    background: "#c5e4fc"
   }
 }));
 
-// const Fade = React.forwardRef(function function Card() {
-//   const [flipped, set] = useState(false)
-//   const { transform, opacity } = useSpring({
-//     opacity: flipped ? 1 : 0,
-//     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
-//     config: { mass: 5, tension: 500, friction: 80 }
-//   })
-//   return (
-//     <div onClick={() => set(state => !state)}>
-//       <a.div class="c back" style={{ opacity: opacity.interpolate(o => 1 - o), transform }} />
-//       <a.div class="c front" style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }} />
-//     </div>
-//   )
-// });
+function getSteps() {
+  return [
+    "Chose a category from the drop down.",
+    "Click on the category you just chose!",
+    "Enjoy your generated picture!"
+  ];
+}
+function getStepContent(stepIndex) {
+  switch (stepIndex) {
+    case 2:
+      return "Hint: To navigate, just scroll up and down!";
+    default:
+      return null;
+  }
+}
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -79,6 +99,8 @@ const Fade = React.forwardRef(function Fade(props, ref) {
 export default function SimpleModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
 
   const handleOpen = () => {
     setOpen(true);
@@ -86,6 +108,17 @@ export default function SimpleModal() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleNext = () => {
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
   };
 
   return (
@@ -107,15 +140,66 @@ export default function SimpleModal() {
       >
         <Fade in={open}>
           <div className={classes.root}>
-            <h2 id="spring-modal-title">Help Modal</h2>
+            <h2 id="spring-modal-title">Help</h2>
             <p id="spring-modal-description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum
+              <div className={classes.stepper}>
+                <Stepper
+                  activeStep={activeStep}
+                  alternativeLabel
+                  className={classes.stepper}
+                >
+                  {steps.map(label => (
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+                <div>
+                  {activeStep === steps.length ? (
+                    <div>
+                      <Typography className={classes.instructions}>
+                        You're all set!
+                      </Typography>
+                      <Button
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        className={classes.backButton}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleReset}
+                      >
+                        Reset
+                      </Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <Typography className={classes.instructions}>
+                        {getStepContent(activeStep)}
+                      </Typography>
+                      <div>
+                        <Button
+                          disabled={activeStep === 0}
+                          onClick={handleBack}
+                          className={classes.backButton}
+                        >
+                          Back
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleNext}
+                        >
+                          {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </p>
           </div>
         </Fade>
