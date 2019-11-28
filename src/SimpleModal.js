@@ -42,6 +42,8 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   instructions: {
+    width: "800px",
+    height: "60px",
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
     textAlign: "center"
@@ -64,8 +66,12 @@ function getSteps() {
 }
 function getStepContent(stepIndex) {
   switch (stepIndex) {
-    case 2:
+    case 0:
+      return "For each ad campaign that you create, you can control how much you're willing to spend on clicks and conversions, which networks and geographical locations you want your ads to show on, and more.";
+    case 1:
       return "Hint: To navigate, just scroll up and down!";
+    case 2:
+      return "An ad group contains one or more ads which target a shared set of keywords.";
     default:
       return null;
   }

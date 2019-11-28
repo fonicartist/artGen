@@ -2,9 +2,6 @@ import React, { useState } from "react";
 
 import background from "./videos/background.mp4";
 import mtn from "./images/free_image.jpeg";
-import sea from "./images/sea.jpeg";
-import trees from "./images/trees.jpeg";
-import river from "./images/water.jpeg";
 import ElevateAppBar from "./Appbar";
 import "./Home.css";
 
@@ -17,6 +14,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -37,6 +35,14 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import VideoIcon from "@material-ui/icons/SlowMotionVideo";
 import AppIcon from "@material-ui/icons/AppsRounded";
 import ContactIcon from "@material-ui/icons/Face";
+
+const calc = (x, y) => [
+  -(y - window.innerHeight / 2) / 30,
+  (x - window.innerWidth / 2) / 30,
+  1.1
+];
+const trans = (x, y, s) =>
+  `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,11 +83,17 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   const [openImage, setOpenImage] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const classes = useStyles();
+
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 5, tension: 450, friction: 40 }
+  }));
 
   const fadeIn = useSpring({
     opacity: 1,
@@ -92,11 +104,26 @@ export default function Home() {
   const fade = useSpring({
     from: { opacity: 0 },
     to: { opacity: openImage ? 1 : 0 },
-    config: { duration: 400 }
+    config: { duration: 600 }
   });
 
-  const onClick = () => {
-    setOpenImage(true);
+  const onClick = async () => {
+    if (!openImage) {
+      setLoading(true);
+      const response = await fetch("http://127.0.0.1:5000", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(selectedIndex)
+      });
+
+      if (response.ok) {
+        setTimeout(() => setLoading(false), 900);
+        setTimeout(() => setOpenImage(true), 1000);
+        // setOpenImage(true);
+      }
+    }
   };
   const reset = () => {
     setOpenImage(false);
@@ -131,21 +158,6 @@ export default function Home() {
     }
     setOpen(false);
   };
-
-  function getImage(i) {
-    switch (i) {
-      case 0:
-        return trees;
-      case 1:
-        return sea;
-      case 2:
-        return river;
-      case 3:
-        return mtn;
-      default:
-        return null;
-    }
-  }
 
   function ContactCard(name) {
     let email = "";
@@ -259,8 +271,18 @@ export default function Home() {
                 </Grow>
               )}
             </Popper>
+            {loading ? <CircularProgress /> : null}
             <animated.div style={fade} className="image">
-              {openImage ? <img src={getImage(selectedIndex)} alt="" /> : null}
+              {openImage ? (
+                <animated.div
+                  className="card"
+                  onMouseMove={({ clientX: x, clientY: y }) =>
+                    set({ xys: calc(x, y) })
+                  }
+                  onMouseLeave={() => set({ xys: [0, 0, 1] })}
+                  style={{ transform: props.xys.interpolate(trans) }}
+                />
+              ) : null}
             </animated.div>
           </MuiThemeProvider>
         </div>

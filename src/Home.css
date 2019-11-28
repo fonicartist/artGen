@@ -64,3 +64,22 @@
   display: flex;
   justify-content: center;
 }
+
+.card {
+  width: 30ch;
+  height: 30ch;
+  border-radius: 5px;
+  background-image: url(images/output.png);
+  background-size: cover;
+  transition: box-shadow 0.5s;
+  will-change: transform;
+}
+
+.card:hover {
+  box-shadow: 0px 30px 100px -10px rgb(143, 39, 39);
+}
+
+.card:active {
+  transition: box-shadow 0.1s;
+  box-shadow: 0px 30px 100px -10px rgb(40, 50, 184);
+}

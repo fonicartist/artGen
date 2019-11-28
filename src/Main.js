@@ -44,13 +44,13 @@ export default function Main() {
         </style>
         <animated.div style={fadeIn}>
           <animated.div
-            className="card"
+            className="logo"
             onMouseMove={({ clientX: x, clientY: y }) =>
               set({ xys: calc(x, y) })
             }
             onMouseLeave={() => set({ xys: [0, 0, 1] })}
-            onClick={() => {
-              setDestination("/Home");
+            onClick={async () => {
+              setTimeout(() => setDestination("/Home"), 800);
             }}
             style={{ transform: props.xys.interpolate(trans) }}
           />
