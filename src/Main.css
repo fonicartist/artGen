@@ -1,4 +1,4 @@
-.card {
+.logo {
   width: 20ch;
   height: 20ch;
   border-radius: 15px;
@@ -8,11 +8,11 @@
   will-change: transform;
 }
 
-.card:hover {
+.logo:hover {
   box-shadow: 0px 30px 100px -10px rgb(143, 39, 39);
 }
 
-.card:active {
+.logo:active {
   transition: box-shadow 0.1s;
   box-shadow: 0px 30px 100px -10px rgb(40, 50, 184);
 }
